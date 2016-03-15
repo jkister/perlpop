@@ -1,0 +1,32 @@
+perlpop v0.9b
+Copyright 2004 Jeremy Kister
+http://jeremy.kister.net/code/perl/perlpop/
+
+perlpop is a perl POP3 server that is compatible with djb's
+checkpassword username/password checking mechanism with the
+following features:
+
+RFC 1939 compliance
+UIDL support 
+TOP support 
+APOP hook
+modular password checking
+
+perlpop may be copied and distributed under the terms found in the
+Perl "Artistic License".  A copy of this license may be found in the
+standard Perl distribution, or in the file "Artistic".
+
+please report all bugs to: perlpop-devel @t jeremykister.com.
+
+perlpop must be started as root in order to set up the listening
+socket on port 110, but immediately drops special priveleges and runs
+as a less priveleged user.  It will accept up to 20 concurrent
+connections, and will only let any particular IP address make 3
+concurrent connections.  Each connection has a 30 second idle timeout.
+
+You may choose perlpop over various other pop3 implementations,
+because it was programmed entirely in perl, making it easy to modify,
+while still serving connections very fast.  Once the daemon is loaded
+into memory, it's speeds rival many top competitors.  In addition,
+the daemon takes a total of about 5MB memory.
+

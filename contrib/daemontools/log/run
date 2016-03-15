@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/local/bin/setuidgid nobody /usr/local/bin/multilog t s1048576 n3 /var/log/perlpop

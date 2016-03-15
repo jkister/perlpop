@@ -1,0 +1,13 @@
+#!/bin/sh
+
+exec env - \
+ DEBUG=1 \
+ CHID=username \
+ MYNAME=perlpop.example.net \
+ LISTEN_IP=0.0.0.0 \
+ CHKPW_PROG="/home/vpopmail/bin/vchkpw" \
+ PWD_PROG="/usr/bin/pwd" \
+ INTERVAL=300 \
+  \
+ /usr/local/bin/softlimit -m 6291456 \
+  /usr/local/script/perlpop.pl 2>&1

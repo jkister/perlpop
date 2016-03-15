@@ -1,0 +1,4 @@
+0.91b * Added support for checking interval between POP attempts
+      * Assured results of LIST were sorted correctly
+
+0.9b  * Initial Public Release

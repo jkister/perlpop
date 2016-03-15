@@ -1,0 +1,48 @@
+
+perlpop has a few prerequisites:
+perl 5.6.1 (or above)
+and a couple of modules, inculding: IO::Socket::INET and IO::Multiplex
+If either of these modules are not on your system, you can easily get
+them by searching on http://search.cpan.org.
+
+cp perlpop.pl /usr/local/script
+chmod 755 /usr/local/script/perlpop.pl
+chown root /usr/local/script/perlpop.pl
+
+You now have to choose how to start perlpop.  You can either 
+configure your startup scripts to start it for you, or, I'd recommend
+running perlpop under DJB's daemontools (available at:
+http://cr.yp.to/daemontools.html )
+
+Notes:
+DEBUG = set to 1 to send more output to logs
+CHID = the user to change to after creating socket on port 110
+MYNAME = a name to tell SMTP clients your hostname is
+LISTEN_IP = IP Address to listen on (0.0.0.0 will listen on all)
+CHKPW_PROG = program to pipe credentials to (checkpassword compatible)
+PWD_PROG = program that will give the present working directory (pwd)
+APOP_PROG = program similar to CHKPW_PROG that supports APOP
+INTERVAL = interval in seconds clients must wait between POP attempts
+           (0 or null disables checking)
+
+#### FOR STARTUP SCRIPTS ONLY ####
+edit the contrib/rc.perlpop, and set the variables as needed
+ cp contrib/rc.perlpop /etc/rc.d/perlpop
+(or cp contrib/rc.perlpop /etc/rc2.d/S99perlpop)
+make sure you set up a cron to cp /dev/null /var/log/perlpop.log
+
+#### FOR DAEMONTOOLS ONLY ####
+edit the contrib/daemontools/run file, and set the variables as needed
+ mkdir -p /service/perlpop/log/ /var/log/perlpop/
+ chown nobody /var/log/perlpop
+ cp contrib/daemontools/run /service/perlpop/run
+ cp contrib/daemontools/log/run /service/perlpop/log/run
+ chmod 755 /service/perlpop/run
+ chmod 755 /service/perlpop/log/run
+
+####  That's It.
+
+ (for daemontools): tail -f /var/log/perlpop/current
+or
+ (for startup script): tail -f /var/log/perlpop.log
+

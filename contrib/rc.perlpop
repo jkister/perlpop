@@ -1,0 +1,27 @@
+#!/bin/sh
+
+case "$1" in
+	start)
+		touch /var/log/perlpop.log 
+		chown nobody /var/log/perlpop.log
+
+		exec env - \
+		 DEBUG=1 \
+		 CHID="username" \
+		 MYNAME="perlpop.example.com" \
+		 LISTEN_IP="0.0.0.0" \
+		 CHKPW_PROG="/home/vpopmail/bin/vchkpw" \
+		 PWD_PROG="/usr/bin/pwd" \
+		 INTERVAL=300 \
+		 \
+		  /usr/local/script/perlpop.pl >/var/log/perlpop.log 2>&1 &
+	;;
+	stop)
+		kill -9 `ps auxc | grep perlpop.pl | grep -v grep | awk '{ print $2 }'`
+	;;
+	*)
+		echo "usage: $0 'start|stop'"
+		exit 1;
+	;;
+esac
+exit 0
